@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap");
+
+* {
+	color: white;
+	font-family: "Roboto", sans-serif;
+}
+
+canvas {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: -2;
+}
+
+.speed-container {
+	display: flex;
+	align-items: center;
+	width: 210px;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+button {
+	border: none;
+	background-color: #666;
+	padding: 1rem 2rem;
+	margin-bottom: 20px;
+	width: 210px;
+}
+
