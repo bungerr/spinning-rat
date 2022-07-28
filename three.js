@@ -6,6 +6,7 @@ const xSlider = document.querySelector("#x-speed");
 const ySlider = document.querySelector("#y-speed");
 const zSlider = document.querySelector("#z-speed");
 const hBtn = document.querySelector("#set-horizontal");
+const cover = document.querySelector(".cover");
 
 let xSpeed = xSlider.value / 100;
 let ySpeed = ySlider.value / 100;
@@ -26,6 +27,11 @@ hBtn.addEventListener("click", () => {
 	xSpeed = 0;
 	model.rotation.z = 0;
 	zSpeed = 0;
+});
+
+cover.addEventListener("click", () => {
+	cover.style.display = "none";
+	// sound.play();
 });
 
 // SETUP -- Initialises essential elements for three.js scene
