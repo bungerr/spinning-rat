@@ -1,6 +1,7 @@
 import "./style.css";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 
 const xSlider = document.querySelector("#x-speed");
 const ySlider = document.querySelector("#y-speed");
@@ -32,6 +33,7 @@ hBtn.addEventListener("click", () => {
 	model.rotation.z = 0;
 	zSpeed = 0;
 	zSlider.value = 0;
+	camera.position.set(0, 1.2, 10);
 });
 
 vBtn.addEventListener("click", () => {
@@ -43,6 +45,7 @@ vBtn.addEventListener("click", () => {
 	model.rotation.z = -(Math.PI / 2);
 	zSpeed = 0;
 	zSlider.value = 0;
+	camera.position.set(0, 1.2, 10);
 });
 
 cover.addEventListener("click", () => {
@@ -105,6 +108,9 @@ audioLoader.load("/bird.mp3", function (buffer) {
 	sound.play();
 });
 
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.update();
+
 window.addEventListener("resize", () => {
 	renderer.setSize(window.innerWidth, window.innerHeight);
 });
@@ -116,6 +122,7 @@ function animate() {
 		model.rotation.y += ySpeed;
 		model.rotation.z += zSpeed;
 	}
+	controls.update();
 	renderer.render(scene, camera);
 }
 
