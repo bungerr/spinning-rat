@@ -8,40 +8,47 @@
 	</head>
 	<body>
 		<canvas id="bg"></canvas>
-		<div class="speed-container">
-			<label for="x-speed">X Speed</label>
-			<input
-				type="range"
-				min="0"
-				max="10"
-				value="1"
-				class="slider"
-				id="x-speed"
-			/>
+		<div class="container">
+			<div>
+				<div class="speed-container">
+					<label for="x-speed">X Speed</label>
+					<input
+						type="range"
+						min="0"
+						max="10"
+						value="1"
+						class="slider"
+						id="x-speed"
+					/>
+				</div>
+				<div class="speed-container">
+					<label for="y-speed">Y Speed</label>
+					<input
+						type="range"
+						min="0"
+						max="10"
+						value="1"
+						class="slider"
+						id="y-speed"
+					/>
+				</div>
+				<div class="speed-container">
+					<label for="z-speed">Z Speed</label>
+					<input
+						type="range"
+						min="0"
+						max="10"
+						value="1"
+						class="slider"
+						id="z-speed"
+					/>
+				</div>
+			</div>
+			<div>
+				<button id="set-horizontal">Set Horizontal</button>
+				<button id="set-vertical">Set Vertical</button>
+			</div>
 		</div>
-		<div class="speed-container">
-			<label for="y-speed">Y Speed</label>
-			<input
-				type="range"
-				min="0"
-				max="10"
-				value="1"
-				class="slider"
-				id="y-speed"
-			/>
-		</div>
-		<div class="speed-container">
-			<label for="z-speed">Z Speed</label>
-			<input
-				type="range"
-				min="0"
-				max="10"
-				value="1"
-				class="slider"
-				id="z-speed"
-			/>
-		</div>
-		<button id="set-horizontal">Set Horizontal</button>
 		<a
 			href="https://github.com/f-llewellyn/spinning-rat"
 			target="_"

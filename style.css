@@ -26,6 +26,8 @@ button {
 	padding: 1rem 2rem;
 	margin-bottom: 20px;
 	width: 210px;
+	cursor: pointer;
+	display: block;
 }
 
 .code {
@@ -42,9 +44,15 @@ button {
 	background-color: #333;
 	display: grid;
 	place-items: center;
+	cursor: pointer;
 }
 
 .cover h1 {
 	font-size: 8vw;
+}
+
+.container {
+	display: flex;
+	justify-content: space-between;
 }
 

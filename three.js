@@ -6,6 +6,7 @@ const xSlider = document.querySelector("#x-speed");
 const ySlider = document.querySelector("#y-speed");
 const zSlider = document.querySelector("#z-speed");
 const hBtn = document.querySelector("#set-horizontal");
+const vBtn = document.querySelector("#set-vertical");
 const cover = document.querySelector(".cover");
 
 let xSpeed = xSlider.value / 100;
@@ -23,15 +24,29 @@ zSlider.addEventListener("input", () => {
 });
 
 hBtn.addEventListener("click", () => {
+	ySpeed = 0.01;
+	ySlider.value = 1;
 	model.rotation.x = 0;
 	xSpeed = 0;
+	xSlider.value = 0;
 	model.rotation.z = 0;
 	zSpeed = 0;
+	zSlider.value = 0;
+});
+
+vBtn.addEventListener("click", () => {
+	xSpeed = 0.01;
+	xSlider.value = 1;
+	model.rotation.y = 0;
+	ySpeed = 0;
+	ySlider.value = 0;
+	model.rotation.z = -(Math.PI / 2);
+	zSpeed = 0;
+	zSlider.value = 0;
 });
 
 cover.addEventListener("click", () => {
 	cover.style.display = "none";
-	// sound.play();
 });
 
 // SETUP -- Initialises essential elements for three.js scene
