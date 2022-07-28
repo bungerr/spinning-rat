@@ -45,7 +45,7 @@ renderer.outputEncoding = THREE.sRGBEncoding;
 let model;
 const loader = new GLTFLoader();
 loader.load(
-	"./rat/scene.gltf",
+	"/rat/scene.gltf",
 	function (gltf) {
 		model = gltf.scene;
 		model.scale.set(0.1, 0.1, 0.1);
@@ -77,7 +77,7 @@ const sound = new THREE.Audio(listener);
 
 // load a sound and set it as the Audio object's buffer
 const audioLoader = new THREE.AudioLoader();
-audioLoader.load("bird.mp3", function (buffer) {
+audioLoader.load("/bird.mp3", function (buffer) {
 	sound.setBuffer(buffer);
 	sound.setLoop(true);
 	sound.setVolume(1);
