@@ -49,6 +49,27 @@ vBtn.addEventListener("click", () => {
 });
 
 cover.addEventListener("click", () => {
+	// create an AudioListener and add it to the camera
+	const listener = new THREE.AudioListener();
+	camera.add(listener);
+
+	// create a global audio source
+	const sound = new THREE.PositionalAudio(listener);
+
+	// load a sound and set it as the Audio object's buffer
+	const audioLoader = new THREE.AudioLoader();
+	audioLoader.load("/bird.mp3", function (buffer) {
+		sound.setBuffer(buffer);
+		sound.setRefDistance(10);
+		sound.setDistanceModel('exponential');
+		sound.setLoop(true);
+		sound.setVolume(1);
+		sound.play();
+	});
+
+	camera.position.set(0, 1.2, 50);
+
+
 	cover.style.display = "none";
 });
 
@@ -92,6 +113,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
 camera.position.set(0, 1.2, 10);
 
+/*
 // create an AudioListener and add it to the camera
 const listener = new THREE.AudioListener();
 camera.add(listener);
@@ -106,7 +128,7 @@ audioLoader.load("/bird.mp3", function (buffer) {
 	sound.setLoop(true);
 	sound.setVolume(1);
 	sound.play();
-});
+});*/
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.update();
