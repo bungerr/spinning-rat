@@ -11,7 +11,7 @@
 		"vite": "^2.9.9"
 	},
 	"dependencies": {
-		"three": "^0.142.0"
+		"gltf-import-export": "^1.0.22",
+		"three": "^0.149.0"
 	}
 }
-

@@ -2,12 +2,13 @@ import "./style.css";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { PositionalAudioHelper } from 'three/examples/jsm/helpers/PositionalAudioHelper';
 
 const xSlider = document.querySelector("#x-speed");
 const ySlider = document.querySelector("#y-speed");
 const zSlider = document.querySelector("#z-speed");
-const hBtn = document.querySelector("#set-horizontal");
-const vBtn = document.querySelector("#set-vertical");
+//const hBtn = document.querySelector("#set-horizontal");
+//const vBtn = document.querySelector("#set-vertical");
 const cover = document.querySelector(".cover");
 
 let xSpeed = xSlider.value / 100;
@@ -24,6 +25,7 @@ zSlider.addEventListener("input", () => {
 	zSpeed = zSlider.value / 100;
 });
 
+/*
 hBtn.addEventListener("click", () => {
 	ySpeed = 0.01;
 	ySlider.value = 1;
@@ -33,7 +35,7 @@ hBtn.addEventListener("click", () => {
 	model.rotation.z = 0;
 	zSpeed = 0;
 	zSlider.value = 0;
-	camera.position.set(0, 1.2, 10);
+	camera.position.set(0, 0, 10);
 });
 
 vBtn.addEventListener("click", () => {
@@ -45,29 +47,40 @@ vBtn.addEventListener("click", () => {
 	model.rotation.z = -(Math.PI / 2);
 	zSpeed = 0;
 	zSlider.value = 0;
-	camera.position.set(0, 1.2, 10);
+	camera.position.set(0, 0, 10);
 });
+*/
 
 cover.addEventListener("click", () => {
 	// create an AudioListener and add it to the camera
 	const listener = new THREE.AudioListener();
 	camera.add(listener);
+	//model.add(listener);
 
 	// create a global audio source
 	const sound = new THREE.PositionalAudio(listener);
+	sound.setDirectionalCone( 90, 360, 0.1 );
+
+	/*const helper = new PositionalAudioHelper( sound );
+	sound.add( helper );
+
+	const sphereAxis = new THREE.AxesHelper(1);
+  	model.add(sphereAxis);*/
 
 	// load a sound and set it as the Audio object's buffer
 	const audioLoader = new THREE.AudioLoader();
-	audioLoader.load("/bird.mp3", function (buffer) {
+	audioLoader.load("/remilio.ogg", function (buffer) {
 		sound.setBuffer(buffer);
-		sound.setRefDistance(10);
+		sound.setRefDistance(2);
 		sound.setDistanceModel('exponential');
 		sound.setLoop(true);
 		sound.setVolume(1);
 		sound.play();
 	});
 
-	camera.position.set(0, 1.2, 50);
+	model.add(sound);
+
+	camera.position.set(0, 0, 10);
 
 
 	cover.style.display = "none";
@@ -75,8 +88,10 @@ cover.addEventListener("click", () => {
 
 // SETUP -- Initialises essential elements for three.js scene
 const scene = new THREE.Scene();
+scene.background = new THREE.Color( 0xDDDDDD );
+scene.fog = new THREE.FogExp2( 0x000000, 0.025 );
 const camera = new THREE.PerspectiveCamera(
-	75,
+	50,
 	window.innerWidth / window.innerHeight,
 	0.1,
 	1000
@@ -90,10 +105,12 @@ renderer.outputEncoding = THREE.sRGBEncoding;
 let model;
 const loader = new GLTFLoader();
 loader.load(
-	"/rat/scene.gltf",
+	"/milady/scene.gltf",
 	function (gltf) {
+		
 		model = gltf.scene;
-		model.scale.set(0.1, 0.1, 0.1);
+
+		model.scale.set(1, 1, 1);
 		scene.add(model);
 	},
 	function (xhr) {
@@ -105,30 +122,13 @@ loader.load(
 );
 
 // LIGHT -- innits light attribute
-const pointLight = new THREE.AmbientLight(0x404040);
-pointLight.position.set(0, 0, 0);
+const pointLight = new THREE.DirectionalLight( 0xAAAAAA );
+pointLight.position.set( 0, 0, 1 ).normalize();
 scene.add(pointLight);
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.set(0, 1.2, 10);
-
-/*
-// create an AudioListener and add it to the camera
-const listener = new THREE.AudioListener();
-camera.add(listener);
-
-// create a global audio source
-const sound = new THREE.Audio(listener);
-
-// load a sound and set it as the Audio object's buffer
-const audioLoader = new THREE.AudioLoader();
-audioLoader.load("/bird.mp3", function (buffer) {
-	sound.setBuffer(buffer);
-	sound.setLoop(true);
-	sound.setVolume(1);
-	sound.play();
-});*/
+camera.position.set(0, 0, 10);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.update();
