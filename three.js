@@ -71,7 +71,7 @@ cover.addEventListener("click", () => {
 	const audioLoader = new THREE.AudioLoader();
 	audioLoader.load("/remilio.ogg", function (buffer) {
 		sound.setBuffer(buffer);
-		sound.setRefDistance(2);
+		sound.setRefDistance(1);
 		sound.setDistanceModel('exponential');
 		sound.setLoop(true);
 		sound.setVolume(1);
