@@ -12,10 +12,15 @@ canvas {
 	z-index: -2;
 }
 
+.slider{
+	width: 16rem !important;
+}
+
 .speed-container {
 	display: flex;
 	align-items: center;
-	width: 8rem;
+	max-width: 16rem;
+	width: 100%;
 	justify-content: space-between;
 	margin-bottom: 20px;
 }
@@ -29,7 +34,7 @@ button {
 	cursor: pointer;
 	display: block;
 }
-
+ 
 .code {
 	position: absolute;
 	bottom: 0;
@@ -48,7 +53,7 @@ button {
 }
 
 .cover img {
-	max-width: 32rem;
+	max-width: 16rem;
 	width: 100%;
 }
 
