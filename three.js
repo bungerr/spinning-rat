@@ -51,10 +51,10 @@ vBtn.addEventListener("click", () => {
 });
 
 
-cover.addEventListener("click", () => {
+cover.addEventListener("click", async () => {
 	// create an AudioListener and add it to the camera
 	const listener = new THREE.AudioListener();
-	camera.add(listener);
+	await camera.add(listener);
 	//model.add(listener);
 
 	// create a global audio source
@@ -69,7 +69,7 @@ cover.addEventListener("click", () => {
 
 	// load a sound and set it as the Audio object's buffer
 	const audioLoader = new THREE.AudioLoader();
-	audioLoader.load("/capybara.mp3", function (buffer) {
+	await audioLoader.load("/capybara.mp3", function (buffer) {
 		sound.setBuffer(buffer);
 		sound.setRefDistance(2);
 		sound.setDistanceModel('exponential');
@@ -77,13 +77,10 @@ cover.addEventListener("click", () => {
 		sound.setVolume(1);
 		sound.play();
 	});
-
+	cover.style.display = "none";
 	model.add(sound);
 
 	camera.position.set(0, 0, 10);
-
-
-	cover.style.display = "none";
 });
 
 // SETUP -- Initialises essential elements for three.js scene
