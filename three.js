@@ -107,13 +107,13 @@ loader.load(
 		
 		model = gltf.scene;
 
-		const box = new THREE.Box3().setFromObject(model);
+		/*const box = new THREE.Box3().setFromObject(model);
 		const size = box.getSize(new THREE.Vector3()).length();
 		const center = box.getCenter(new THREE.Vector3());
 		controls.reset();
 		model.position.x += (model.position.x - center.x);
 		model.position.y += (model.position.y - center.y);
-		model.position.z += (model.position.z - center.z);
+		model.position.z += (model.position.z - center.z);*/
 		camera.lookAt( new THREE.Vector3(0,0,10) );
 		//model.scale.set(1, 1, 1);
 		scene.add(model);
