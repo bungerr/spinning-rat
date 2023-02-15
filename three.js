@@ -7,8 +7,8 @@ import { PositionalAudioHelper } from 'three/examples/jsm/helpers/PositionalAudi
 const xSlider = document.querySelector("#x-speed");
 const ySlider = document.querySelector("#y-speed");
 const zSlider = document.querySelector("#z-speed");
-//const hBtn = document.querySelector("#set-horizontal");
-//const vBtn = document.querySelector("#set-vertical");
+const hBtn = document.querySelector("#set-horizontal");
+const vBtn = document.querySelector("#set-vertical");
 const cover = document.querySelector(".cover");
 
 let xSpeed = xSlider.value / 100;
@@ -25,7 +25,7 @@ zSlider.addEventListener("input", () => {
 	zSpeed = zSlider.value / 100;
 });
 
-/*
+
 hBtn.addEventListener("click", () => {
 	ySpeed = 0.01;
 	ySlider.value = 1;
@@ -35,7 +35,7 @@ hBtn.addEventListener("click", () => {
 	model.rotation.z = 0;
 	zSpeed = 0;
 	zSlider.value = 0;
-	camera.position.set(0, 0, 10);
+	camera.lookAt( new THREE.Vector3(0,0,10) );
 });
 
 vBtn.addEventListener("click", () => {
@@ -47,9 +47,9 @@ vBtn.addEventListener("click", () => {
 	model.rotation.z = -(Math.PI / 2);
 	zSpeed = 0;
 	zSlider.value = 0;
-	camera.position.set(0, 0, 10);
+	camera.lookAt( new THREE.Vector3(0,0,10) );
 });
-*/
+
 
 cover.addEventListener("click", () => {
 	// create an AudioListener and add it to the camera
@@ -69,9 +69,9 @@ cover.addEventListener("click", () => {
 
 	// load a sound and set it as the Audio object's buffer
 	const audioLoader = new THREE.AudioLoader();
-	audioLoader.load("/remilio.ogg", function (buffer) {
+	audioLoader.load("/capybara.mp3", function (buffer) {
 		sound.setBuffer(buffer);
-		sound.setRefDistance(1);
+		sound.setRefDistance(2);
 		sound.setDistanceModel('exponential');
 		sound.setLoop(true);
 		sound.setVolume(1);
@@ -88,7 +88,7 @@ cover.addEventListener("click", () => {
 
 // SETUP -- Initialises essential elements for three.js scene
 const scene = new THREE.Scene();
-scene.background = new THREE.Color( 0xDDDDDD );
+scene.background = new THREE.Color( 0x333333 );
 scene.fog = new THREE.FogExp2( 0x000000, 0.025 );
 const camera = new THREE.PerspectiveCamera(
 	50,
@@ -105,12 +105,20 @@ renderer.outputEncoding = THREE.sRGBEncoding;
 let model;
 const loader = new GLTFLoader();
 loader.load(
-	"/milady/scene.gltf",
+	"scene.gltf",
 	function (gltf) {
 		
 		model = gltf.scene;
 
-		model.scale.set(1, 1, 1);
+		const box = new THREE.Box3().setFromObject(model);
+		const size = box.getSize(new THREE.Vector3()).length();
+		const center = box.getCenter(new THREE.Vector3());
+		controls.reset();
+		model.position.x += (model.position.x - center.x);
+		model.position.y += (model.position.y - center.y);
+		model.position.z += (model.position.z - center.z);
+		camera.lookAt( new THREE.Vector3(0,0,10) );
+		//model.scale.set(1, 1, 1);
 		scene.add(model);
 	},
 	function (xhr) {
