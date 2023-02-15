@@ -47,6 +47,11 @@ button {
 	cursor: pointer;
 }
 
+.cover img {
+	max-width: 32rem;
+	width: 100%;
+}
+
 .cover h1 {
 	font-size: 8vw;
 }

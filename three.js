@@ -35,7 +35,8 @@ hBtn.addEventListener("click", () => {
 	model.rotation.z = 0;
 	zSpeed = 0;
 	zSlider.value = 0;
-	camera.lookAt( new THREE.Vector3(0,0,10) );
+	camera.position.set(0, 0, 4);
+	camera.lookAt( new THREE.Vector3(0,0,4) );
 });
 
 vBtn.addEventListener("click", () => {
@@ -47,12 +48,57 @@ vBtn.addEventListener("click", () => {
 	model.rotation.z = -(Math.PI / 2);
 	zSpeed = 0;
 	zSlider.value = 0;
-	camera.lookAt( new THREE.Vector3(0,0,10) );
+	camera.position.set(0, 0, 4);
+	camera.lookAt( new THREE.Vector3(0,0,4) );
 });
 
 
 cover.addEventListener("click", async () => {
-	// create an AudioListener and add it to the camera
+
+	/*const helper = new PositionalAudioHelper( sound );
+	sound.add( helper );
+
+	const sphereAxis = new THREE.AxesHelper(1);
+  	model.add(sphereAxis);*/
+	cover.style.display = "none";
+
+	camera.position.set(0, 0, 4);
+});
+
+// SETUP -- Initialises essential elements for three.js scene
+const scene = new THREE.Scene();
+scene.background = new THREE.Color( 0x333333 );
+scene.fog = new THREE.FogExp2( 0x000000, 0.025 );
+const camera = new THREE.PerspectiveCamera(
+	50,
+	window.innerWidth / window.innerHeight,
+	0.1,
+	1000
+);
+const renderer = new THREE.WebGLRenderer({
+	canvas: document.querySelector("#bg"),
+});
+renderer.outputEncoding = THREE.sRGBEncoding;
+
+// MODEL -- Imports and sets model logic
+let model;
+const loader = new GLTFLoader();
+loader.load(
+	"scene.gltf",
+	async function (gltf) {
+		
+		model = gltf.scene;
+
+		/*const box = new THREE.Box3().setFromObject(model);
+		const size = box.getSize(new THREE.Vector3()).length();
+		const center = box.getCenter(new THREE.Vector3());
+		controls.reset();
+		model.position.x += (model.position.x - center.x);
+		model.position.y += (model.position.y - center.y);
+		model.position.z += (model.position.z - center.z);*/
+		camera.lookAt( new THREE.Vector3(0,0,4) );
+		//model.scale.set(1, 1, 1);
+		// create an AudioListener and add it to the camera
 	const listener = new THREE.AudioListener();
 	await camera.add(listener);
 	//model.add(listener);
@@ -77,46 +123,8 @@ cover.addEventListener("click", async () => {
 		sound.setVolume(1);
 		sound.play();
 	});
-	cover.style.display = "none";
 	model.add(sound);
-
-	camera.position.set(0, 0, 10);
-});
-
-// SETUP -- Initialises essential elements for three.js scene
-const scene = new THREE.Scene();
-scene.background = new THREE.Color( 0x333333 );
-scene.fog = new THREE.FogExp2( 0x000000, 0.025 );
-const camera = new THREE.PerspectiveCamera(
-	50,
-	window.innerWidth / window.innerHeight,
-	0.1,
-	1000
-);
-const renderer = new THREE.WebGLRenderer({
-	canvas: document.querySelector("#bg"),
-});
-renderer.outputEncoding = THREE.sRGBEncoding;
-
-// MODEL -- Imports and sets model logic
-let model;
-const loader = new GLTFLoader();
-loader.load(
-	"scene.gltf",
-	function (gltf) {
-		
-		model = gltf.scene;
-
-		/*const box = new THREE.Box3().setFromObject(model);
-		const size = box.getSize(new THREE.Vector3()).length();
-		const center = box.getCenter(new THREE.Vector3());
-		controls.reset();
-		model.position.x += (model.position.x - center.x);
-		model.position.y += (model.position.y - center.y);
-		model.position.z += (model.position.z - center.z);*/
-		camera.lookAt( new THREE.Vector3(0,0,10) );
-		//model.scale.set(1, 1, 1);
-		scene.add(model);
+	scene.add(model);
 	},
 	function (xhr) {
 		console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
@@ -128,7 +136,7 @@ loader.load(
 
 // LIGHT -- innits light attribute
 const pointLight = new THREE.DirectionalLight( 0xAAAAAA );
-pointLight.position.set( 0, 0, 1 ).normalize();
+pointLight.position.set( 0, 0, 10 ).normalize();
 scene.add(pointLight);
 
 renderer.setPixelRatio(window.devicePixelRatio);
