@@ -35,6 +35,7 @@ hBtn.addEventListener("click", () => {
 	model.rotation.z = 0;
 	zSpeed = 0;
 	zSlider.value = 0;
+	controls.reset();
 	camera.position.set(0, 0, 4);
 	camera.lookAt( new THREE.Vector3(0,0,4) );
 });
@@ -48,6 +49,7 @@ vBtn.addEventListener("click", () => {
 	model.rotation.z = -(Math.PI / 2);
 	zSpeed = 0;
 	zSlider.value = 0;
+	controls.reset();
 	camera.position.set(0, 0, 4);
 	camera.lookAt( new THREE.Vector3(0,0,4) );
 });
@@ -97,6 +99,7 @@ loader.load(
 		model.position.y += (model.position.y - center.y);
 		model.position.z += (model.position.z - center.z);*/
 		camera.lookAt( new THREE.Vector3(0,0,4) );
+		controls.update();
 		//model.scale.set(1, 1, 1);
 		// create an AudioListener and add it to the camera
 	const listener = new THREE.AudioListener();
@@ -136,7 +139,7 @@ loader.load(
 
 // LIGHT -- innits light attribute
 const pointLight = new THREE.DirectionalLight( 0xAAAAAA );
-pointLight.position.set( 0, 0, 10 ).normalize();
+pointLight.position.set( 0, 0, 1 ).normalize();
 scene.add(pointLight);
 
 renderer.setPixelRatio(window.devicePixelRatio);
