@@ -1,11 +1,11 @@
 Model Information:
-* title:	Capybara
-* source:	https://sketchfab.com/3d-models/capybara-445b5a9c131d482fad76bf5b6c2f8271
-* author:	Rectus (https://sketchfab.com/rectus)
+* title:	Granny: Horror Game - Rat
+* source:	https://sketchfab.com/3d-models/granny-horror-game-rat-9f0ae1c7bf2d4740adeacb7e370c4480
+* author:	EWTube0 (https://sketchfab.com/EWTube0)
 
 Model License:
-* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
-* requirements:	Author must be credited. No commercial use.
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
 
 If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
-This work is based on "Capybara" (https://sketchfab.com/3d-models/capybara-445b5a9c131d482fad76bf5b6c2f8271) by Rectus (https://sketchfab.com/rectus) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+This work is based on "Granny: Horror Game - Rat" (https://sketchfab.com/3d-models/granny-horror-game-rat-9f0ae1c7bf2d4740adeacb7e370c4480) by EWTube0 (https://sketchfab.com/EWTube0) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

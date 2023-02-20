@@ -38,8 +38,8 @@ hBtn.addEventListener("click", () => {
 	zSpeed = 0;
 	zSlider.value = 0;
 	controls.reset();
-	camera.position.set(0, 0, 4);
-	camera.lookAt( new THREE.Vector3(0,0,4) );
+	camera.position.set(0, 0, 5);
+	camera.lookAt( new THREE.Vector3(0,0,5) );
 });
 
 vBtn.addEventListener("click", () => {
@@ -52,8 +52,8 @@ vBtn.addEventListener("click", () => {
 	zSpeed = 0;
 	zSlider.value = 0;
 	controls.reset();
-	camera.position.set(0, 0, 4);
-	camera.lookAt( new THREE.Vector3(0,0,4) );
+	camera.position.set(0, 0, 5);
+	camera.lookAt( new THREE.Vector3(0,0,5) );
 });
 
 
@@ -65,8 +65,6 @@ cover.addEventListener("click", async () => {
 	const sphereAxis = new THREE.AxesHelper(1);
   	model.add(sphereAxis);*/
 	cover.style.display = "none";
-
-	camera.position.set(0, 0, 4);
 });
 
 // SETUP -- Initialises essential elements for three.js scene
@@ -76,7 +74,7 @@ scene.fog = new THREE.FogExp2( 0x000000, 0.025 );
 const camera = new THREE.PerspectiveCamera(
 	50,
 	window.innerWidth / window.innerHeight,
-	0.1,
+	0.05,
 	1000
 );
 const renderer = new THREE.WebGLRenderer({
@@ -100,9 +98,9 @@ loader.load(
 		model.position.x += (model.position.x - center.x);
 		model.position.y += (model.position.y - center.y);
 		model.position.z += (model.position.z - center.z);*/
-		camera.lookAt( new THREE.Vector3(0,0,4) );
+		camera.lookAt( new THREE.Vector3(0,0,5) );
 		controls.update();
-		//model.scale.set(1, 1, 1);
+		model.scale.set(0.05, 0.05, 0.05);
 		// create an AudioListener and add it to the camera
 	const listener = new THREE.AudioListener();
 	await camera.add(listener);
@@ -120,15 +118,15 @@ loader.load(
 
 	// load a sound and set it as the Audio object's buffer
 	const audioLoader = new THREE.AudioLoader();
-	await audioLoader.load("/capybara.mp3", function (buffer) {
+	await audioLoader.load("/swag.mp3", function (buffer) {
 		sound.setBuffer(buffer);
 		const audioContext = sound.context;
 
 		biquadFilter = audioContext.createBiquadFilter();
 		biquadFilter.type = "lowpass"; // Low pass filter
-		biquadFilter.frequency.setValueAtTime(150, audioContext.currentTime);
+		biquadFilter.frequency.setValueAtTime(175, audioContext.currentTime);
 		sound.setFilter(biquadFilter);
-		sound.setRefDistance(4);
+		sound.setRefDistance(5);
 		sound.setDistanceModel('exponential');
 		sound.setLoop(true);
 		sound.setVolume(1);
@@ -152,7 +150,7 @@ scene.add(pointLight);
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.set(0, 0, 10);
+camera.position.set(0, 0, 5);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.update();
@@ -169,7 +167,6 @@ function animate() {
 		model.rotation.z += zSpeed;
 	}
 	controls.update();
-	console.log(biquadFilter);
 	renderer.render(scene, camera);
 }
 
