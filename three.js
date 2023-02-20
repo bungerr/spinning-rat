@@ -15,6 +15,8 @@ let xSpeed = xSlider.value / 100;
 let ySpeed = ySlider.value / 100;
 let zSpeed = zSlider.value / 100;
 
+var biquadFilter;
+
 xSlider.addEventListener("input", () => {
 	xSpeed = xSlider.value / 100;
 });
@@ -108,7 +110,7 @@ loader.load(
 
 	// create a global audio source
 	const sound = new THREE.PositionalAudio(listener);
-	sound.setDirectionalCone( 90, 360, 0.1 );
+	sound.setDirectionalCone( 90, 360, 0.075 );
 
 	/*const helper = new PositionalAudioHelper( sound );
 	sound.add( helper );
@@ -120,7 +122,13 @@ loader.load(
 	const audioLoader = new THREE.AudioLoader();
 	await audioLoader.load("/capybara.mp3", function (buffer) {
 		sound.setBuffer(buffer);
-		sound.setRefDistance(2);
+		const audioContext = sound.context;
+
+		biquadFilter = audioContext.createBiquadFilter();
+		biquadFilter.type = "lowpass"; // Low pass filter
+		biquadFilter.frequency.setValueAtTime(150, audioContext.currentTime);
+		sound.setFilter(biquadFilter);
+		sound.setRefDistance(4);
 		sound.setDistanceModel('exponential');
 		sound.setLoop(true);
 		sound.setVolume(1);
@@ -161,6 +169,7 @@ function animate() {
 		model.rotation.z += zSpeed;
 	}
 	controls.update();
+	console.log(biquadFilter);
 	renderer.render(scene, camera);
 }
 
