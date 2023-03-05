@@ -122,10 +122,10 @@ loader.load(
 		sound.setBuffer(buffer);
 		const audioContext = sound.context;
 
-		biquadFilter = audioContext.createBiquadFilter();
+		/*biquadFilter = audioContext.createBiquadFilter();
 		biquadFilter.type = "lowpass"; // Low pass filter
-		biquadFilter.frequency.setValueAtTime(175, audioContext.currentTime);
-		sound.setFilter(biquadFilter);
+		biquadFilter.frequency.setValueAtTime(2000, audioContext.currentTime);
+		sound.setFilter(biquadFilter);*/
 		sound.setRefDistance(5);
 		sound.setDistanceModel('exponential');
 		sound.setLoop(true);
