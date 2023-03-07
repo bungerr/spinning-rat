@@ -16,6 +16,7 @@ let ySpeed = ySlider.value / 100;
 let zSpeed = zSlider.value / 100;
 
 var biquadFilter;
+var sound;
 
 xSlider.addEventListener("input", () => {
 	xSpeed = xSlider.value / 100;
@@ -58,12 +59,26 @@ vBtn.addEventListener("click", () => {
 
 
 cover.addEventListener("click", async () => {
+	const listener = new THREE.AudioListener();
+	await camera.add(listener);
+	const sound = new THREE.PositionalAudio(listener);
+	sound.setDirectionalCone( 90, 360, 0.075 );
+	const audioLoader = new THREE.AudioLoader();
+	await audioLoader.load("/swag.mp3", function (buffer) {
+		sound.setBuffer(buffer);
+		const audioContext = sound.context;
 
-	/*const helper = new PositionalAudioHelper( sound );
-	sound.add( helper );
+		/*biquadFilter = audioContext.createBiquadFilter();
+		biquadFilter.type = "lowpass"; // Low pass filter
+		biquadFilter.frequency.setValueAtTime(2000, audioContext.currentTime);
+		sound.setFilter(biquadFilter);*/
+		sound.setRefDistance(5);
+		sound.setDistanceModel('exponential');
+		sound.setLoop(true);
+		sound.setVolume(1);
+		sound.play();
+	});
 
-	const sphereAxis = new THREE.AxesHelper(1);
-  	model.add(sphereAxis);*/
 	cover.style.display = "none";
 });
 
@@ -90,48 +105,10 @@ loader.load(
 	async function (gltf) {
 		
 		model = gltf.scene;
-
-		/*const box = new THREE.Box3().setFromObject(model);
-		const size = box.getSize(new THREE.Vector3()).length();
-		const center = box.getCenter(new THREE.Vector3());
-		controls.reset();
-		model.position.x += (model.position.x - center.x);
-		model.position.y += (model.position.y - center.y);
-		model.position.z += (model.position.z - center.z);*/
 		camera.lookAt( new THREE.Vector3(0,0,5) );
 		controls.update();
 		model.scale.set(0.05, 0.05, 0.05);
-		// create an AudioListener and add it to the camera
-	const listener = new THREE.AudioListener();
-	await camera.add(listener);
-	//model.add(listener);
 
-	// create a global audio source
-	const sound = new THREE.PositionalAudio(listener);
-	sound.setDirectionalCone( 90, 360, 0.075 );
-
-	/*const helper = new PositionalAudioHelper( sound );
-	sound.add( helper );
-
-	const sphereAxis = new THREE.AxesHelper(1);
-  	model.add(sphereAxis);*/
-
-	// load a sound and set it as the Audio object's buffer
-	const audioLoader = new THREE.AudioLoader();
-	await audioLoader.load("/swag.mp3", function (buffer) {
-		sound.setBuffer(buffer);
-		const audioContext = sound.context;
-
-		/*biquadFilter = audioContext.createBiquadFilter();
-		biquadFilter.type = "lowpass"; // Low pass filter
-		biquadFilter.frequency.setValueAtTime(2000, audioContext.currentTime);
-		sound.setFilter(biquadFilter);*/
-		sound.setRefDistance(5);
-		sound.setDistanceModel('exponential');
-		sound.setLoop(true);
-		sound.setVolume(1);
-		sound.play();
-	});
 	model.add(sound);
 	scene.add(model);
 	},
