@@ -40,7 +40,7 @@ hBtn.addEventListener("click", () => {
 	zSlider.value = 0;
 	controls.reset();
 	camera.position.set(0, 0, 5);
-	camera.lookAt( new THREE.Vector3(0,0,5) );
+	camera.lookAt(new THREE.Vector3(0, 0, 5));
 });
 
 vBtn.addEventListener("click", () => {
@@ -54,7 +54,7 @@ vBtn.addEventListener("click", () => {
 	zSlider.value = 0;
 	controls.reset();
 	camera.position.set(0, 0, 5);
-	camera.lookAt( new THREE.Vector3(0,0,5) );
+	camera.lookAt(new THREE.Vector3(0, 0, 5));
 });
 
 
@@ -62,7 +62,7 @@ cover.addEventListener("click", async () => {
 	const listener = new THREE.AudioListener();
 	await camera.add(listener);
 	const sound = new THREE.PositionalAudio(listener);
-	sound.setDirectionalCone( 90, 360, 0.075 );
+	sound.setDirectionalCone(90, 360, 0.075);
 	const audioLoader = new THREE.AudioLoader();
 	await audioLoader.load("/swag.mp3", function (buffer) {
 		sound.setBuffer(buffer);
@@ -84,8 +84,8 @@ cover.addEventListener("click", async () => {
 
 // SETUP -- Initialises essential elements for three.js scene
 const scene = new THREE.Scene();
-scene.background = new THREE.Color( 0x333333 );
-scene.fog = new THREE.FogExp2( 0x000000, 0.025 );
+scene.background = new THREE.Color(0x333333);
+scene.fog = new THREE.FogExp2(0x000000, 0.025);
 const camera = new THREE.PerspectiveCamera(
 	50,
 	window.innerWidth / window.innerHeight,
@@ -101,16 +101,16 @@ renderer.outputEncoding = THREE.sRGBEncoding;
 let model;
 const loader = new GLTFLoader();
 loader.load(
-	"scene.gltf",
+	"sample.glb",
 	async function (gltf) {
-		
+
 		model = gltf.scene;
-		camera.lookAt( new THREE.Vector3(0,0,5) );
+		camera.lookAt(new THREE.Vector3(0, 0, 5));
 		controls.update();
 		model.scale.set(0.05, 0.05, 0.05);
 
-	model.add(sound);
-	scene.add(model);
+		model.add(sound);
+		scene.add(model);
 	},
 	function (xhr) {
 		console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
@@ -121,8 +121,8 @@ loader.load(
 );
 
 // LIGHT -- innits light attribute
-const pointLight = new THREE.DirectionalLight( 0xAAAAAA );
-pointLight.position.set( 0, 0, 1 ).normalize();
+const pointLight = new THREE.DirectionalLight(0xAAAAAA);
+pointLight.position.set(0, 0, 1).normalize();
 scene.add(pointLight);
 
 renderer.setPixelRatio(window.devicePixelRatio);

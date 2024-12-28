@@ -1,58 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<link rel="icon" type="image/x-icon" href="favicon.ico" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>spin</title>
-	</head>
-	<body>
-		<canvas id="bg"></canvas>
-		<div class="container">
-			<div>
-				<div class="speed-container">
-					<label for="x-speed">X</label>
-					<input
-						type="range"
-						min="0"
-						max="10"
-						value="0"
-						class="slider"
-						id="x-speed"
-					/>
-				</div>
-				<div class="speed-container">
-					<label for="y-speed">Y</label>
-					<input
-						type="range"
-						min="0"
-						max="10"
-						value="1"
-						class="slider"
-						id="y-speed"
-					/>
-				</div>
-				<div class="speed-container">
-					<label for="z-speed">Z</label>
-					<input
-						type="range"
-						min="0"
-						max="10"
-						value="0"
-						class="slider"
-						id="z-speed"
-					/>
-				</div>
-			</div>
-			<div>
-				<button id="set-horizontal">Horizontal</button>
-				<button id="set-vertical">Vertical</button>
-			</div>
-		</div>
-		<div class="cover">
-			<img src="stare.jpg" />
-		</div>
-		<script type="module" src="/three.js"></script>
-	</body>
-</html>
 
+<head>
+	<meta charset="UTF-8" />
+	<link rel="icon" type="image/x-icon" href="favicon.ico" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>spin</title>
+</head>
+
+<body>
+	<canvas id="bg"></canvas>
+	<div class="container">
+		<div>
+			<div class="speed-container">
+				<label for="x-speed">X</label>
+				<input type="range" min="0" max="10" value="0" class="slider" id="x-speed" />
+			</div>
+			<div class="speed-container">
+				<label for="y-speed">Y</label>
+				<input type="range" min="0" max="10" value="1" class="slider" id="y-speed" />
+			</div>
+			<div class="speed-container">
+				<label for="z-speed">Z</label>
+				<input type="range" min="0" max="10" value="0" class="slider" id="z-speed" />
+			</div>
+		</div>
+		<div>
+			<button id="set-horizontal">Horizontal</button>
+			<button id="set-vertical">Vertical</button>
+		</div>
+	</div>
+	<div class="cover">
+		<img src="stare.png" />
+	</div>
+	<script type="module" src="/three.js"></script>
+</body>
+
+</html>
