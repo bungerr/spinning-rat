@@ -107,7 +107,7 @@ loader.load(
 		model = gltf.scene;
 		camera.lookAt(new THREE.Vector3(0, 0, 5));
 		controls.update();
-		model.scale.set(0.05, 0.05, 0.05);
+		model.scale.set(1, 1, 1);
 
 		model.add(sound);
 		scene.add(model);
