@@ -12,12 +12,13 @@ canvas {
 	z-index: -2;
 }
 
-.slider{
+.slider {
 	width: 16rem !important;
 }
 
 .speed-container {
-	display: flex;
+	/*display: flex;*/
+	display: none !important;
 	align-items: center;
 	max-width: 16rem;
 	width: 100%;
@@ -26,6 +27,7 @@ canvas {
 }
 
 button {
+	display: none !important;
 	border: none;
 	background-color: #666;
 	padding: .5rem .5rem;
@@ -34,7 +36,7 @@ button {
 	cursor: pointer;
 	display: block;
 }
- 
+
 .code {
 	position: absolute;
 	bottom: 0;
@@ -65,4 +67,3 @@ button {
 	display: flex;
 	justify-content: space-between;
 }
-

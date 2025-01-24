@@ -68,10 +68,10 @@ cover.addEventListener("click", async () => {
 		sound.setBuffer(buffer);
 		const audioContext = sound.context;
 
-		/*biquadFilter = audioContext.createBiquadFilter();
+		biquadFilter = audioContext.createBiquadFilter();
 		biquadFilter.type = "lowpass"; // Low pass filter
 		biquadFilter.frequency.setValueAtTime(2000, audioContext.currentTime);
-		sound.setFilter(biquadFilter);*/
+		sound.setFilter(biquadFilter);
 		sound.setRefDistance(5);
 		sound.setDistanceModel('exponential');
 		sound.setLoop(true);
@@ -107,7 +107,7 @@ loader.load(
 		model = gltf.scene;
 		camera.lookAt(new THREE.Vector3(0, 0, 5));
 		controls.update();
-		model.scale.set(2, 2, 2);
+		model.scale.set(1, 1, 1);
 
 		model.add(sound);
 		scene.add(model);
