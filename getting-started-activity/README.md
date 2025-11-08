@@ -15,16 +15,17 @@ A Discord Activity port of the spinning-rat Three.js application. This interacti
 
 ```
 getting-started-activity/
-├── client/              # Frontend (Vite + Three.js)
+├── client/              # Frontend (Vite + Three.js) - Deploy this to Vercel
+│   ├── api/            # Serverless API functions (Vercel)
+│   │   └── token.js   # OAuth2 token exchange endpoint
 │   ├── main.js         # Main application code with Three.js and Discord SDK
 │   ├── style.css       # Styling
 │   ├── index.html      # HTML structure
-│   └── public/         # Static assets (3D model, audio, images)
-├── api/                 # Serverless API functions (Vercel)
-│   └── token.js        # OAuth2 token exchange endpoint
-├── server/              # Local development server (Express.js)
+│   ├── public/         # Static assets (3D model, audio, images)
+│   ├── package.json    # Dependencies
+│   └── vite.config.js  # Vite configuration
+├── server/              # Local development server (Express.js) - Not deployed
 │   └── server.js       # Local OAuth2 endpoint for testing
-├── vercel.json          # Vercel deployment configuration
 └── example.env          # Environment variables template
 ```
 
@@ -76,7 +77,26 @@ npm install
 
 ### 4. Deploy to Vercel
 
-#### Option A: Deploy via Vercel CLI (Recommended)
+#### Option A: Deploy via Vercel Dashboard (Recommended)
+
+1. Push your code to GitHub, GitLab, or Bitbucket
+2. Go to [vercel.com](https://vercel.com) and sign in
+3. Click "Add New..." → "Project"
+4. Import your Git repository
+5. Configure project settings:
+   - **Framework Preset**: Vite (should auto-detect)
+   - **Root Directory**: `getting-started-activity/client`
+   - **Build Command**: Leave as default (`vite build`)
+   - **Output Directory**: Leave as default (`dist`)
+6. Add Environment Variables before deploying:
+   - Click "Environment Variables"
+   - Add `VITE_DISCORD_CLIENT_ID` with your Discord Client ID
+   - Add `DISCORD_CLIENT_SECRET` with your Discord Client Secret
+   - Make sure both are set for **Production**, **Preview**, and **Development**
+7. Click "Deploy"
+8. Wait for deployment to complete and **copy your production URL** (e.g., `https://spinning-rat-activity.vercel.app`)
+
+#### Option B: Deploy via Vercel CLI
 
 1. Install Vercel CLI globally:
    ```bash
@@ -88,57 +108,39 @@ npm install
    vercel login
    ```
 
-3. From the `getting-started-activity` directory, deploy:
+3. Navigate to the client directory:
+   ```bash
+   cd getting-started-activity/client
+   ```
+
+4. Deploy:
    ```bash
    vercel
    ```
 
-4. Follow the prompts:
+5. Follow the prompts:
    - Set up and deploy? **Y**
    - Which scope? Select your account
    - Link to existing project? **N**
    - Project name? `spinning-rat-activity` (or your choice)
    - In which directory is your code located? **./** (just press Enter)
-   - Want to override the settings? **N**
+   - Vercel should auto-detect Vite
 
-5. Add environment variables in Vercel:
+6. Add environment variables:
    ```bash
    vercel env add VITE_DISCORD_CLIENT_ID
-   ```
-   - Enter your Discord Client ID when prompted
-   - Select **All** environments (Production, Preview, Development)
+   # Enter your Discord Client ID, select "All" environments
 
-   ```bash
    vercel env add DISCORD_CLIENT_SECRET
+   # Enter your Discord Client Secret, select "All" environments
    ```
-   - Enter your Discord Client Secret when prompted
-   - Select **All** environments
 
-6. Redeploy with environment variables:
+7. Redeploy with environment variables:
    ```bash
    vercel --prod
    ```
 
-7. Copy your deployment URL (e.g., `https://spinning-rat-activity.vercel.app`)
-
-#### Option B: Deploy via Vercel Dashboard
-
-1. Push your code to GitHub, GitLab, or Bitbucket
-2. Go to [vercel.com](https://vercel.com) and sign in
-3. Click "Add New..." → "Project"
-4. Import your Git repository
-5. Configure project settings:
-   - **Framework Preset**: Other
-   - **Root Directory**: Leave as `./`
-   - **Build Command**: Leave default (Vercel will use `vercel.json`)
-   - **Output Directory**: Leave default
-6. Add Environment Variables before deploying:
-   - Click "Environment Variables"
-   - Add `VITE_DISCORD_CLIENT_ID` with your Discord Client ID
-   - Add `DISCORD_CLIENT_SECRET` with your Discord Client Secret
-   - Make sure both are available for all environments
-7. Click "Deploy"
-8. Wait for deployment to complete and copy your production URL
+8. **Copy your deployment URL** from the output
 
 ### 5. Configure Discord to Use Your Vercel Deployment
 
@@ -244,9 +246,10 @@ The built files will be in `client/dist/` and can be deployed to any static host
 - Verify the file was included in the Vercel deployment
 
 **Vercel deployment issues:**
-- Check that `vercel.json` is in the root of the `getting-started-activity` directory
+- Make sure you set the root directory to `getting-started-activity/client`
 - Ensure all dependencies are listed in `client/package.json`
 - Review build logs in the Vercel dashboard for specific errors
+- Verify the `/api` folder exists inside `client/` directory
 - Make sure Node.js version is compatible (v16+)
 
 ## Credits
