@@ -1,0 +1,13 @@
+{
+  "name": "spinning-rat-discord-activity",
+  "version": "1.0.0",
+  "description": "Discord Activity for Spinning Rat 3D experience",
+  "private": true,
+  "scripts": {
+    "dev": "npm run dev --prefix client",
+    "build": "npm run build --prefix client"
+  },
+  "keywords": ["discord", "activity", "threejs"],
+  "author": "",
+  "license": "MIT"
+}
